@@ -1,0 +1,28 @@
+typedef int Rank;
+#define DEFAULT_CAPACITY 3
+template <typename T> class Vector{     //数据元素类型为T
+protected:
+    Rank_size;  int _capacity;  T* _elem;   //规模 容量 数据区
+    void copyFrom(T const* A, Rank lo, Rank hi);    //复制数组区间
+    
+public:
+//构造函数constructor
+Vector(int c=DEFAULT_CAPACITY, int s=0, T v=0){      //容量为c 规模s 所有元素初始为0
+    _elem=new T[_capacity=c];
+    for(_size=0; _size<s; _elem[_size++]=v);
+}
+Vector(Vector<T> const& V, Rank lo, Rank hi) {copyFrom(V._elem, 0, V._size);}        //向量区间复制  
+
+//析构函数destructor
+~Vector(){delete []_elem;}
+
+};  //Vector
+
+
+//copyFrom方法
+Template <typename T>
+void Vector<T>::copyFrom(T const* A,Rank lo, Rank hi){
+    _elem=new T[_capacity=2*(hi-lo)];   _size=0;
+    while(lo<hi)
+        _elem[_size++]=A[lo++];
+}
